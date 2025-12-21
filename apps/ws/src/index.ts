@@ -1,7 +1,5 @@
 import { WebSocketServer } from "ws";
-import { GameManager } from "./GameManager";
-
-const gameManager = new GameManager();
+import { gameManager } from "./GameManager";
 
 const wss = new WebSocketServer({ port: 8080 }, () => {
     console.log('Server is running on port 8080');

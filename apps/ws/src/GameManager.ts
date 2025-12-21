@@ -7,12 +7,20 @@ export class GameManager {
     private games: Game[];
     private pendingUser: WebSocket | null; // user that is waiting for a game
     private users: WebSocket[]; // users that are playing a game
+    private static instance: GameManager; // singleton instance associated with a class not with an Object
 
 
-    constructor() {
+    private constructor() { // making constructior private to implement singleton pattern
         this.games = [];
         this.pendingUser = null; 
         this.users = [];
+    }
+
+    static getInstance() {
+        if (!GameManager.instance) {
+            GameManager.instance = new GameManager();
+        }
+        return GameManager.instance;
     }
 
     addUser(socket: WebSocket) {
@@ -50,5 +58,5 @@ export class GameManager {
         
     }
 
-
 }
+export const gameManager = GameManager.getInstance();
